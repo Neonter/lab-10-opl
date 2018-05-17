@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// the instruction says to locate all classes in this one file
+
 namespace lab_10
 {
-    class CProfile
+    class CProfile : IStrengthParam
     {
         private double m_dLength;
         private double m_dWeightPerMeter;
@@ -45,6 +47,22 @@ namespace lab_10
         public double getOverallWeight()
         {
             return Length / 1000 * WeightPerMeter;
+        }
+        public virtual double getArea() // usually method name should start from capital letter
+        {
+            return 0;
+        }
+        public virtual double GetSectionModulus()
+        {
+            return 0;
+        }
+        public virtual double GetInertiaMoment()
+        {
+            return 0;
+        }
+        public void Show2()
+        {
+            Console.WriteLine("Section modulus: {0} , Inertia moment: {1}", GetSectionModulus(), GetInertiaMoment());
         }
     }
 
@@ -107,6 +125,18 @@ namespace lab_10
         public void Show()
         {
             Console.WriteLine("Hello i am " + CIBeam.Type + " ,here are my parameters: \n lenght: {0}, weight perimeter: {1}, structural type: {2}, height: {3}, width: {4}, thickness: {5} \n", Length, WeightPerMeter, StructuralType, Height, Width, Thickness);
+        }
+        public override double getArea() // usually method name should start from capital letter
+        {
+            return (2*Thickness*Width) + ((Height - (2*Thickness)) * Thickness); // 
+        }
+        public override double GetSectionModulus()
+        {
+            return GetInertiaMoment()/(Height/2);
+        }
+        public override double GetInertiaMoment()
+        {
+            return ((Width*Math.Pow(Height,3)) - (Width - Thickness) * Math.Pow(Height-(2*Thickness),3))/12;
         }
     }
 
