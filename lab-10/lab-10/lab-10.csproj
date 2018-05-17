@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="all-in-one.cs" />
     <Compile Include="CProfile_test10.cs" />
     <Compile Include="IStrengthParam.cs" />
     <Compile Include="Program.cs" />
